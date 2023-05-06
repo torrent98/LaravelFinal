@@ -10,6 +10,9 @@ use \App\Models\Mechanic;
 use \App\Models\Service;
 use \App\Models\Rating;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -25,9 +28,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::truncate();
-        Provider::truncate();
+        Mechanic::truncate();
         Service::truncate();
-        AppointmentRating::truncate();
+        Rating::truncate();
 
         //User::factory(5)->create();
         Mechanic::factory(5)->create();
