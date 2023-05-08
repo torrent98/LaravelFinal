@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-
-
 use Illuminate\Http\Request;
 
-use App\Http\Resources\UserResource;
+use App\Models\Rating;
+use App\Models\Mechanic;
+use App\Models\Service;
+use App\Models\User;
 
+use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -19,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->isAdmin())
+        
         return new UserCollection(User::all());
     }
 
@@ -44,8 +49,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if(auth()->user()->isAdmin())
-            return new UserResource($user);
+        
+        return new UserResource($user);
     }
 
     /**
@@ -61,7 +66,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user, $id)
+    public function update(Request $request, User $user)
     {
         if(auth()->user()->id == $user->id || auth()->user()->isAdmin()) {
             $validator = Validator::make($request->all(), [
@@ -92,7 +97,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user,$id)
+    public function destroy(User $user)
     {
         if($user->id != auth()->user()->id && auth()->user()->isAdmin()) {
             $user->delete();

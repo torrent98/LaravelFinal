@@ -115,16 +115,16 @@ class MechanicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mechanic $mechanics)
+    public function destroy(Mechanic $mechanic)
     {
         if(auth()->user()->isUser())
             return response()->json('You are not authorized to delete mechanics.');
             
-        $rating = Rating::get()->where('providers', $mechanics_id);
+        $rating = Rating::get()->where('mechanic', $mechanic->id);
         if (count($rating) > 0)
             return response()->json('You cannot delete mechanics that have ratings.');
 
-        $mechanics->delete();
+        $mechanic->delete();
 
         return response()->json('Mechanic is deleted successfully.');
 

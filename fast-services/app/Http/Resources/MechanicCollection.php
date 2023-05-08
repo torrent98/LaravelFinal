@@ -13,7 +13,7 @@ class MechanicCollection extends ResourceCollection
      * @return array<int|string, mixed>
      */
 
-    public static $wrap = 'providers';
+    public static $wrap = 'mechanics';
 
     public function toArray(Request $request): array
     {

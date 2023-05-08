@@ -9,7 +9,7 @@ use App\Models\Rating;
 use App\Models\Mechanic;
 
 use App\Http\Resources\ServiceResource;
-use App\Http\Resources\ServiceCollection;
+use App\Http\Resources\ServiceCollcetion;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +21,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return new ServiceCollection(Service::all());
+        return new ServiceCollcetion(Service::all());
     }
 
     /**
@@ -73,13 +73,14 @@ class ServiceController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service, $id)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:150|unique:services,name,' .$service->id,
+            'name' => 'required|string|max:150|unique:services,name,' .$id,
         ]);
 
         if ($validator->fails())

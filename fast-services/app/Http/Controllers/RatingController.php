@@ -85,7 +85,7 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rating $ratings)
+    public function update(Request $request, Rating $rating)
     {
         $validator = Validator::make($request->all(), [
             'date_and_time' => 'required|date',
@@ -102,19 +102,19 @@ class RatingController extends Controller
         if(auth()->user()->isAdmin())
             return response()->json('You are not authorized to update ratings.');    
 
-        if(auth()->user()->id != $apprat->user)
+        if(auth()->user()->id != $rating->user)
             return response()->json('You are not authorized to update someone elses ratings.');     
 
-        $ratings->date_and_time = $request->date_and_time;
-        $ratings->user = auth()->user()->id;
-        $ratings->service = $request->service;
-        $ratings->rating = $request->rating;
-        $ratings->note = $request->note;
-        $ratings->mechanic = $request->mechanic;
+        $rating->date_and_time = $request->date_and_time;
+        $rating->user = auth()->user()->id;
+        $rating->service = $request->service;
+        $rating->rating = $request->rating;
+        $rating->note = $request->note;
+        $rating->mechanic = $request->mechanic;
 
-        $ratings->save();
+        $rating->save();
 
-        return response()->json(['Appointment rating is updated successfully.', new RatingResource($ratings)]);
+        return response()->json(['Appointment rating is updated successfully.', new RatingResource($rating)]);
 
     }
 

@@ -9,11 +9,11 @@ use App\Http\Resources\RatingCollection;
 
 class MechanicRatingController extends Controller
 {
-    public function index($mechanics_id)
+    public function index($mechanic_id)
     {
-        $rating = Rating::get()->where('mechanics', $mechanics_id);
+        $rating = Rating::get()->where('mechanic', $mechanic_id);
         if (count($rating) == 0)
             return response()->json('Data not found', 404);
-        return new RatingCollection($apprat);
+        return new RatingCollection($rating);
     }
 }
