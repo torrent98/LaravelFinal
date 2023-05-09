@@ -40,14 +40,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('users', UserController::class)->only(['destroy']);  //radi
     Route::post('/register', [AuthController::class, 'register']); //radi
   
-    Route::resource('ratings', RatingController::class)->only(['store', 'update', 'destroy']); //
+    Route::resource('ratings', RatingController::class)->only(['store', 'update', 'destroy']); //radi store, PUT cudan, delete radi
 
     Route::post('/logout', [AuthController::class, 'logout']);  //radi
     
     //ulogovan KORISNIK
     Route::get('/myrating', [UserRatingController::class, 'myrating']); //
     
-    Route::resource('users', UserController::class)->only(['update']);  //radi cudno
+    Route::resource('users', UserController::class)->only(['update']);  //PUT radi cudno
 
 });
 
@@ -70,4 +70,4 @@ Route::get('/mechanics/{id}/ratings', [MechanicRatingController::class, 'index']
 
 Route::get('/services/{id}/ratings', [ServiceRatingController::class, 'index']); //radi
 
-Route::resource('users', UserController::class)->only(['index', 'show']); //
+Route::resource('users', UserController::class)->only(['index', 'show']); //radi

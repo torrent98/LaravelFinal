@@ -26,7 +26,7 @@ class Rating extends Model
     }
 
     public function mechanickey() {
-        return $this->belongsTo(Mechanic::class, 'mechanics');
+        return $this->belongsTo(Mechanic::class, 'mechanic');
     }
 
     protected $fillable = [
